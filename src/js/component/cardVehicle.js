@@ -1,0 +1,42 @@
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { useContext } from 'react';
+import { Context } from "../store/appContext";
+
+export const CardVehicles = ({vehicles}) => {
+
+  const { store, actions } = useContext(Context);
+
+  return (
+    <div className="container my-3">
+    <div className="d-flex">
+      <h1 className="text-danger justify-content-start">Vehicles</h1>
+    </div>
+    <div className="row flex-wrap overflow-auto">
+      {vehicles.map((vehicle, index) => (
+        <div key={index} className="col-3 container-vehicles">
+          <div className="card my-3 container-datos">
+          <img src="https://www.laopticadeantonio.es/wp-content/uploads/2013/12/150x150.gif" className="card-img-top d-flex mx-auto" alt="" style={{width:'150px', height: '150px' }}/>
+            <div className="card-body">
+              <h5 className="card-title">
+              {vehicle.name}
+            </h5>
+            <div className="d-flex justify-content-center">
+            <Link to={`/vehicles/${vehicle.uid}`}>
+              {" "}
+              <button href="#" className="btn btn-primary">
+                Learn More!
+              </button>
+              </Link>
+              <button className="btn btn-outline-dark ms-2" onClick={() => {actions.selectElement(vehicle) 
+              actions.addElement()}}><i className="far fa-heart"></i></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+  );
+};
+
